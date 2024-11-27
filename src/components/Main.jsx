@@ -6,7 +6,7 @@ export default function Main() {
                 <h3>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Delectus doloremque totam temporibus possimus corporis magni ea? </h3>
             </div>
             <div className="main_picture">
-                <img src="public/GustavoSanchesPFP.jpg" alt="picture" />
+                <img src="public/circle-4-X-shape-cones.svg" alt="geometry spin" />
             </div>
         </section>
     )

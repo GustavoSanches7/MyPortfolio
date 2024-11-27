@@ -7,7 +7,7 @@ export default function Header() {
     return (
         <header className="header">
             <div>
-                <img src="public/javascript.svg" alt="logo" className="header_svg" />
+                <img src="public/javascript.svg" alt="logo" className="header_logo" />
             </div>
             <div className="header_contact">
                 <img src="public/octocat.svg" alt="github" className="header_svg" />
