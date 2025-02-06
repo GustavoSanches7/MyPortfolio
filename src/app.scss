@@ -47,19 +47,20 @@ body {
     font-weight: 400;
     line-height: 1.6;
     background-color: #242424;
-    background-image: url("public/endless-constellation.svg");
+    background-image: url("/endless-constellation.svg");
 }
 
-h1{
+h1 {
     font-family: Orbitron;
 }
 
+/* Utility */
 
 .container {
     max-width: 120rem;
     margin: 8rem auto;
     background-color: rgba(19, 19, 19, 0.881);
-/*     background: linear-gradient(var(--color-tertiary-3), var(--color-secondary-1)); */
+    /*     background: linear-gradient(var(--color-tertiary-3), var(--color-secondary-1)); */
     box-shadow: 0 2rem 6rem rgba(0, 0, 0, .3);
     min-height: 50rem;
     display: flex;
@@ -73,12 +74,15 @@ h1{
     border-bottom: solid rgba(255, 255, 255, 0.779);
     margin: 0rem 10rem 0rem 10rem;
     border-radius: 1rem;
-/*     animation: moveInBottom .75s ease-out .75s;
+    /*     animation: moveInBottom .75s ease-out .75s;
     animation-fill-mode: forwards; */
-    animation: appearLeftAndRight 1.25s ease-out; 
+    animation: appearLeftAndRight 1.25s ease-out;
     animation-fill-mode: forwards;
     width: 85%;
+}
 
+.hidden {
+    opacity: 0;
 }
 
 /* HEADER SECTION */
@@ -104,10 +108,12 @@ h1{
     padding: 1rem;
 }
 
+
+
 .header_logo {
     height: 4rem;
-    width: 4rem;
-    margin-left: 3rem;
+    width: 10rem;
+    /* margin-left: 3rem; */
 }
 
 .header_svg {
@@ -132,6 +138,7 @@ h1{
     flex-direction: column;
     padding: 0 1rem 0 1rem;
     margin-left: 0.2rem;
+
     &>* {
         height: 100%;
         display: flex;
@@ -143,7 +150,7 @@ h1{
     }
 }
 
-.language_select_container{
+.language_select_container {
     margin-left: 0.2rem;
 }
 
@@ -151,7 +158,7 @@ h1{
     margin: 0 0.4rem 0 0.4rem
 }
 
-.innactive{
+.innactive {
     padding: 0.2rem;
 }
 
@@ -162,7 +169,22 @@ h1{
     background-color: var(--color-tertiary-2);
     border-radius: 1rem;
     transform: translateY(-.3rem);
-    transition: all /* .2s */;
+    transition: all
+        /* .2s */
+    ;
+}
+
+/* hamburgernav component */
+
+.hamburgerNav {
+    display: none;
+    position: absolute;
+    top: 0.75rem;
+    right: 0.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 2.25rem;
+    height: 2rem;
 }
 
 /* MAIN SECTION COMPONENT */
@@ -173,6 +195,7 @@ h1{
     padding: 2rem;
     font-size: 2rem;
     margin: 10rem;
+    width: 80%;
 }
 
 .main h1 {
@@ -234,6 +257,7 @@ h1{
     margin: 0rem 10rem 5rem 10rem;
     animation: moveInBottom .75s ease-out .75s;
     animation-fill-mode: backwards;
+    width: 80%;
 }
 
 .about h1 {
@@ -241,7 +265,7 @@ h1{
     margin-bottom: 1rem;
 }
 
-.about p{
+.about p {
     margin-bottom: 1rem;
 }
 
@@ -293,6 +317,7 @@ h1{
     box-shadow: var(--color-tertiary-shadow-1) .5rem .5rem, var(--color-tertiary-shadow-2) 1rem 1rem, var(--color-tertiary-shadow-3) 1.5rem 1.5rem;
     transform: translateY(-.3rem);
     transition: all .2s;
+    cursor: default;
 }
 
 .download_cv {
@@ -316,26 +341,33 @@ h1{
     padding: 2rem;
     animation: moveInBottom .75s ease-out .75s;
     animation-fill-mode: backwards;
+    width: 80%;
 }
 
-.projects_cards{
+.projects_cards {
     display: flex;
     margin-top: 3rem;
+    align-items: stretch;
 }
 
 .project_card {
-    height: 40rem;
+    min-height: 45rem;
     width: 40rem;
-    background-color: rgb(78, 76, 76);
+    background-color: rgb(47, 47, 47);
     margin-right: 2rem;
     border-radius: 1rem;
-
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: flex-start;
     align-items: center;
+    /* overflow: hidden; /* test */
     animation: moveInBottom .75s ease-out .75s;
     animation-fill-mode: backwards;
+    transition: transform 500ms ease;
+}
+
+.project_card:hover {
+    transform: scale(1.03);
 }
 
 .project_card_title {
@@ -345,64 +377,108 @@ h1{
     background-color: var(--color-primary-2);
 }
 
-.project_card_title{
+.project_card_title {
     color: black;
 }
 
 .project_card_image {
-    height: 100%;
+    /*     height: 100%; setting at 100% was always pushing the project card details down  */
     width: 100%;
 }
 
 .project_card img {
-    height: 90%;
+    height: 30rem;
     width: 100%;
-    object-fit: cover;
-
-    border-radius: 0 0 1rem 1rem;
+    object-fit: fill;
+    padding: 0.3rem;
+    border-radius: 1rem;
+    cursor: pointer;
 
 }
 
-.project_card-details {
+.project_card_details {
     list-style-position: inside;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    width: 90%;
     align-items: center;
     margin-bottom: 2rem;
+    /*    height: auto;
+    max-height: 20rem; /* Example: Ensure the content does not exceed a certain height */
+    /* overflow: hidden; */
+    transition: transform 500ms ease;
+    list-style-type: none;
+    font-size: 1.5rem;
+
+}
+
+.project_card_details_link {
+    display: flex;
+    /*     padding: 0.4rem; */
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.project_card_details_link:hover h2 {
+    color: var(--color-primary-1);
+}
+
+/* .project_card_details_link:hover {
+    transform: translateY(-0.3rem);
+    transition: all 0.2s;
+} maybe a bit too much*/
+
+.project_card_details h2 {
+    cursor: pointer;
+}
+
+.project_card_details img {
+    height: 2rem;
+    width: 2rem;
+    margin-left: 0.4rem;
 }
 
 /* FOOTER COMPONENT */
 
-.footer{
+.footer {
     display: flex;
     flex-direction: column;
-    width: 100%; 
+    width: 100%;
     background-color: var(--color-primary-1);
     margin-top: 3rem;
 }
 
-.footer_title{
+.footer_title {
     margin-top: 2rem;
 }
 
-.footer img{
+.footer img {
     height: 4rem;
-    width:4rem;
+    width: 4rem;
 }
 
-.footer_contact{
+.footer_contact {
     display: flex;
     justify-content: center;
     align-items: center;
     padding: 1.5rem;
 }
 
-.footer_contact h2, .footer_contact h3 {
+.footer_contact h2,
+.footer_contact h3 {
     color: black;
-} 
+}
 
-.footer_contact_item{
+.footer_contact_availability {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.6rem;
+    margin: 0 2rem 0 2rem;
+}
+
+.footer_contact_item {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -411,7 +487,7 @@ h1{
     cursor: pointer;
 }
 
-.footer_contact_item img{
+.footer_contact_item img {
     margin-right: 0.5rem;
 }
 
@@ -488,5 +564,137 @@ h1{
 
     to {
         transform: rotate(0deg);
+    }
+}
+
+/* Media queries */
+
+@media (max-width: 1100px) {
+
+    .container {
+        margin: 0;
+    }
+
+    .header {
+        position: fixed;
+        z-index: 999;
+    }
+
+    .main_textbox_h1 {
+        width: 40rem
+    }
+
+    .projects_cards {
+        flex-direction: column;
+    }
+
+    .project_card {
+        width: 35rem;
+        margin-right: 0;
+        margin-bottom: 3rem;
+
+    }
+
+    .footer_contact {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .footer_contact h2 {
+        text-align: start;
+    }
+
+
+}
+
+@media (max-width: 880px) {
+
+    /* MAIN SECTION */
+
+    .header_contact {
+        display: none;
+        /*         flex-direction: column; looks better in a row*/
+        width: 100%;
+        position: absolute;
+        top: 6rem;
+        left: 0;
+        background-color: var(--color-primary-1);
+        padding: 1rem;
+        z-index: 1000;
+    }
+
+    .header_contact.show {
+        display: flex;
+    }
+
+    .hamburgerNav {
+        display: flex;
+        height: 3.6rem;
+        width: 3.6rem;
+
+    }
+
+    .hamburgerNav img {
+        height: 100%;
+        width: 100%;
+    }
+
+    .main {
+        flex-direction: column;
+        align-items: center;
+        margin: none;
+    }
+
+    .main_textbox {
+        margin-bottom: 5rem;
+        padding-right: 0;
+        width: 100%;
+        text-align: center;
+    }
+
+    .main_textbox_h1 {
+        width: 100%;
+    }
+
+    .main h1 {
+        font-size: 4.5rem;
+    }
+
+    .main h3 {
+        font-size: 2.5rem;
+    }
+
+    .main_picture img {
+        height: 15rem;
+        width: 15rem;
+    }
+
+    /* ABOUT SECTION */
+
+    .about_textbox {
+
+        margin-top: 2rem;
+    }
+
+    .about_skills_pill_container {
+        flex-direction: column;
+    }
+
+}
+
+@media (max-width: 880px) {
+
+    .header_svg {
+        width: 2.5rem;
+    }
+
+    .project_card {
+        width: 30rem;
+        margin-right: 0;
+        margin-bottom: 3rem;
+    }
+
+    .footer {
+        font-size: 0.9rem;
     }
 }

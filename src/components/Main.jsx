@@ -1,6 +1,7 @@
 import { useContext, useState, useEffect } from "react"
 import { LanguageContext } from "../LanguageContext"
 import Tilt from "react-parallax-tilt"
+import { useInView } from "react-intersection-observer";
 
 
 export default function Main() {
@@ -10,8 +11,6 @@ export default function Main() {
     const [text, setText] = useState('');
     const [delta, setDelta] = useState(300 - Math.random() * 100)
     const period = 2000;
-
-
 
     useEffect(() => {
         let ticker = setInterval(() => {
@@ -42,15 +41,21 @@ export default function Main() {
         }
     };
 
+    /* IntersectionObserver */ 
+    const { ref, inView } = useInView({
+        threshold: 0.1,
+        triggerOnce: true, 
+      });
+
     return (
         <section className="main">
-            <div className="main_textbox">
+            <div className={`${inView ? 'main_textbox' : 'hidden'}`} ref={ref} >
                 <div className="main_textbox_h1"> <h1> {language.main_title} </h1> </div>
                 <div> <h3 className="main_textbox_h3">{text} </h3> </div>
             </div>
             <Tilt reset={false} >
-                <div className="main_picture">
-                    <img src="public/icon_spin.svg" alt="geometry spin" />
+                <div className={`${inView ? 'main_picture' : 'hidden'}`}  ref={ref}>
+                    <img src="/icon_spin.svg" alt="geometry spin" />
                 </div>
             </Tilt>
         </section>
